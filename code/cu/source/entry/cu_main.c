@@ -1,9 +1,8 @@
-#include "entry/nr_cu_main.h"
-#include "entry/nr_du_main.h"
-#include "gtpu/gtpu_proc.h"
-#include "pdcp/pdcp_proc.h"
-#include "sdap/sdap_proc.h"
+#include "entry/cu_main.h"
+#include "entry/du_main.h"
 #include "process/msg_proc/cu_msg_proc.h"
+#include "process/data_proc/cu_dl_data_proc.h"
+
 
 
 int main()
@@ -15,11 +14,13 @@ int main()
 	return 0;
 }
 
-int cu_main_proc()
+U32 cu_main_proc()
 {
 	HelloGtpu();
 	Buff* buff =  NewBuffWithInit(8, 1);
 	CHECK_NULL_RETURN_RESULT(buff,FAIL);
 	printf("totalsize = %u\n",buff->ctxt.totalLen);
 	FreeBuff(buff);
+	U32 ret = CuDlDataProc();
+	return SUCC;
 }

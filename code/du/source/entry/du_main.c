@@ -1,4 +1,4 @@
-#include "entry/nr_du_main.h"
+#include "entry/du_main.h"
 #include "rlc/rlc_proc.h"
 #include "mac/mac_proc.h"
 

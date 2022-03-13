@@ -4,7 +4,7 @@
 #include "base.h"
 
 
-int cu_main_proc();
+U32 cu_main_proc();
 
 #endif 
 

@@ -19,11 +19,43 @@ typedef struct BuffCtxt
 	U32 totalLen;
 }BuffCtxt;
 
+#define Node(type)\
+struct\
+{\
+	struct type*  nextNode;\
+	struct type** preNode;\
+}
+
+#define Link(type)\
+struct\
+{\
+	struct type*  head;\
+	struct type** tail;\
+	U32           nodeNum;\
+}
+
+typedef Link(buff)  BUFF_LINK;
+
+#define LINK_INIT(link)\
+{\
+    (link)->head = NULL;\
+	(link)->tail = &((tail)->head);\
+	(link)->nodeNum = 0;\
+}
+
+#define INSERT_FROM_TAIL(link,buff,domain)\
+{\
+	(buff)->domain.nextNode = NULL;\
+	(buff)->domain.preNode = (link)->head;\
+	*((link)->tail) = (buff);\
+	(link)->tail = &((buff)->domain.nextNode);\
+}
 
 typedef struct Buff
 {
-	BuffCtxt ctxt;
-	U8      payLoad[0];
+	BuffCtxt     ctxt;
+	Node(Buff) 	 nodeInfo;
+	U8           payLoad[0];
 }Buff;
 
 
